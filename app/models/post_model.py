@@ -54,8 +54,8 @@ class Post:
         validate_invalid_keys(**data)
         validate_type_values(**data)
         found_post_id(post_id)
+        data["update_at"] = current_time()
         post = cls.db.posts.find_one_and_update({"_id":post_id},{"$set":data},return_document=True)
-        post["update_at"] = current_time()
         return post
 
 
